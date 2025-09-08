@@ -1,8 +1,27 @@
-// EMERGENCY: Disable all animations to prevent page hangs
-* {
+// EMERGENCY: Disable problematic animations only
+.reddit-post-card {
   animation: none !important;
-  transition: none !important;
+}
+
+// Allow basic hover transitions but no transforms
+* {
   transform: none !important;
+}
+
+// Safe transitions for better UX
+.reddit-post-card {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  
+  &:hover {
+    border-color: var(--border-focus);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.reddit-sort-option,
+.reddit-join-button,
+.reddit-action-button {
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 // Enhanced Reddit-style voting widget

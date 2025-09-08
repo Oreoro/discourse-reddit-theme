@@ -5,18 +5,23 @@ export default apiInitializer("1.8.0", (api) => {
   // Add CSS class to body for Reddit theme identification
   document.body.classList.add("reddit-social-theme");
 
-  // TEMPORARILY DISABLED to prevent infinite loops and performance issues
-  /*
-  // Apply Reddit styling on page navigation
+  // Safe Reddit styling - only apply CSS classes, no DOM manipulation
   api.onPageChange((url) => {
     if (shouldApplyRedditStyling(url)) {
       schedule("afterRender", () => {
-        applyRedditStyling();
-        addRedditSortBar();
+        // Only apply CSS classes, no DOM manipulation to prevent loops
+        const topicList = document.querySelector(".topic-list");
+        if (topicList) {
+          topicList.classList.add("reddit-feed");
+        }
+        
+        const topicItems = document.querySelectorAll(".topic-list-item");
+        topicItems.forEach(item => {
+          item.classList.add("reddit-post-card");
+        });
       });
     }
   });
-  */
 
   function shouldApplyRedditStyling(url) {
     const redditPages = ["/", "/latest", "/new", "/top", "/hot"];
