@@ -47,37 +47,6 @@ export default class RightBlocks extends Component {
   }
 
   <template>
-    {{#if this.shouldRenderBlocks}}
-      <StickySidebar>
-        <div class="blocks --right">
-          <div class="blocks__wrapper">
-            {{#each this.blocks as |row|}}
-              <div
-                style={{htmlSafe (concat "order:" row.order)}}
-                class="blocks__row"
-              >
-                {{#each row.blocks as |block|}}
-                  {{#let (this.blockify block) as |BlockComponent|}}
-                    {{#if BlockComponent}}
-                      {{component
-                        BlockComponent
-                        size=block.size
-                        period=block.period
-                        count=block.count
-                        title=block.title
-                        cta=block.cta
-                        ctas=block.ctas
-                        description=block.description
-                        url=block.url
-                      }}
-                    {{/if}}
-                  {{/let}}
-                {{/each}}
-              </div>
-            {{/each}}
-          </div>
-        </div>
-      </StickySidebar>
-    {{/if}}
+    <!-- TEMPORARILY DISABLED to prevent duplication issues -->
   </template>
 }

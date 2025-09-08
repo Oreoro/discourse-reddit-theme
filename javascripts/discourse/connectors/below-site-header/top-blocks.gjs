@@ -54,48 +54,6 @@ export default class TopBlocks extends Component {
   }
 
   <template>
-    {{#if this.isHomepage}}
-      {{#if this.blocks}}
-        <div class="blocks --top">
-          <div
-            style={{htmlSafe
-              (if
-                this.blocksBackground
-                (concat "background-image: url(" this.blocksBackground ")")
-              )
-            }}
-            class="blocks__wrapper"
-          >
-            {{#each this.blocks as |row|}}
-              <div
-                style={{htmlSafe
-                  (concat "order:" (if row.order row.order "0;"))
-                }}
-                class="blocks__row"
-              >
-                {{#each row.blocks as |block|}}
-                  {{#let (this.blockify block) as |BlockComponent|}}
-                    {{#if BlockComponent}}
-                      {{component
-                        BlockComponent
-                        size=block.size
-                        period=block.period
-                        count=block.count
-                        title=block.title
-                        cta=block.cta
-                        ctas=block.ctas
-                        description=block.description
-                        url=block.url
-                        image=block.image
-                      }}
-                    {{/if}}
-                  {{/let}}
-                {{/each}}
-              </div>
-            {{/each}}
-          </div>
-        </div>
-      {{/if}}
-    {{/if}}
+    <!-- TEMPORARILY DISABLED to prevent duplication issues -->
   </template>
 }
