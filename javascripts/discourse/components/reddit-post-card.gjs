@@ -2,11 +2,13 @@ import Component from "@glimmer/component";
 import { action } from "@ember/object";
 import { service } from "@ember/service";
 import { tracked } from "@glimmer/tracking";
+import { on } from "@ember/modifier";
 import RedditVoteWidget from "./reddit-vote-widget";
 import formatDate from "discourse/helpers/format-date";
 import categoryLink from "discourse/helpers/category-link";
 import userLink from "discourse/helpers/user-link";
 import icon from "discourse-common/helpers/d-icon";
+import { if as ifHelper } from "@ember/helper";
 
 export default class RedditPostCard extends Component {
   @service siteSettings;

@@ -1,6 +1,10 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { action } from "@ember/object";
+import { on } from "@ember/modifier";
+import { fn } from "@ember/helper";
+import { eq } from "truth-helpers";
+import { if as ifHelper } from "@ember/helper";
 
 export default class RedditSortBar extends Component {
   @tracked activeSort = "hot";

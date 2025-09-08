@@ -6,6 +6,8 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import DButton from "discourse/components/d-button";
 import icon from "discourse-common/helpers/d-icon";
+import { eq } from "truth-helpers";
+import { if as ifHelper } from "@ember/helper";
 
 export default class RedditVoteWidget extends Component {
   @service currentUser;

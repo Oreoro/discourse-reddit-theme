@@ -5,6 +5,7 @@ import { action } from "@ember/object";
 import { debounce } from "@ember/runloop";
 import { service } from "@ember/service";
 import { not } from "truth-helpers";
+import { if as ifHelper } from "@ember/helper";
 import concatClass from "discourse/helpers/concat-class";
 import icon from "discourse/helpers/d-icon";
 import number from "discourse/helpers/number";
