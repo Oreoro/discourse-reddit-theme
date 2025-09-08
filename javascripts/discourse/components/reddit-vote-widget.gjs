@@ -109,7 +109,8 @@ export default class RedditVoteWidget extends Component {
   }
 
   async likeTopic(topic) {
-    const result = await ajax(`/posts/${topic.id}/toggle-like`, {
+    // Use the correct endpoint for topic liking
+    const result = await ajax(`/t/${topic.id}/toggle-like`, {
       type: "PUT"
     });
     
@@ -123,7 +124,8 @@ export default class RedditVoteWidget extends Component {
   }
 
   async unlikeTopic(topic) {
-    const result = await ajax(`/posts/${topic.id}/toggle-like`, {
+    // Use the correct endpoint for topic liking
+    const result = await ajax(`/t/${topic.id}/toggle-like`, {
       type: "PUT"
     });
     
@@ -177,10 +179,10 @@ export default class RedditVoteWidget extends Component {
       <DButton
         @action={{this.upvote}}
         @disabled={{this.isLoading}}
-        @translatedTitle={{if this.voteState "Remove upvote" "Upvote"}}
+        @translatedTitle={{ifHelper this.voteState "Remove upvote" "Upvote"}}
         class={{this.upvoteClass}}
-        @icon={{if this.isLoading "spinner" "chevron-up"}}
-        aria-label={{if (eq this.voteState "up") "Remove upvote" "Upvote this post"}}
+        @icon={{ifHelper this.isLoading "spinner" "chevron-up"}}
+        aria-label={{ifHelper (eq this.voteState "up") "Remove upvote" "Upvote this post"}}
         aria-pressed={{eq this.voteState "up"}}
       />
       <div 
@@ -194,10 +196,10 @@ export default class RedditVoteWidget extends Component {
       <DButton
         @action={{this.downvote}}
         @disabled={{this.isLoading}}
-        @translatedTitle={{if (eq this.voteState "down") "Remove downvote" "Downvote"}}
+        @translatedTitle={{ifHelper (eq this.voteState "down") "Remove downvote" "Downvote"}}
         class={{this.downvoteClass}}
         @icon="chevron-down"
-        aria-label={{if (eq this.voteState "down") "Remove downvote" "Downvote this post"}}
+        aria-label={{ifHelper (eq this.voteState "down") "Remove downvote" "Downvote this post"}}
         aria-pressed={{eq this.voteState "down"}}
       />
     </div>

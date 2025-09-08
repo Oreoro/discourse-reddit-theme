@@ -127,7 +127,7 @@ export default class RedditPostCard extends Component {
   }
 
   <template>
-    <article class="reddit-post-card {{if this.isPinned 'pinned'}} {{if this.isLocked 'locked'}}" 
+    <article class="reddit-post-card {{ifHelper this.isPinned 'pinned'}} {{ifHelper this.isLocked 'locked'}}" 
              role="article" 
              aria-label="Post: {{this.topic.title}}">
       <div class="reddit-post-content">
@@ -144,25 +144,25 @@ export default class RedditPostCard extends Component {
             </a>
             <span class="reddit-separator" aria-hidden="true">•</span>
             <span class="reddit-posted-by">Posted by</span>
-            {{#if this.authorInfo.user}}
+            {{#ifHelper this.authorInfo.user}}
               {{userLink this.authorInfo.user hideAvatar="true" class="reddit-author"}}
             {{else}}
               <span class="reddit-author deleted-user">{{this.authorInfo.username}}</span>
-            {{/if}}
+            {{/ifHelper}}
             <span class="reddit-separator" aria-hidden="true">•</span>
             <time class="reddit-timestamp" datetime={{this.topic.created_at}} title={{formatDate this.topic.created_at}}>
               {{this.timeAgo}}
             </time>
-            {{#if this.isPinned}}
+            {{#ifHelper this.isPinned}}
               <span class="reddit-pinned" title="Pinned post">
                 {{icon "thumbtack"}}
               </span>
-            {{/if}}
-            {{#if this.isLocked}}
+            {{/ifHelper}}
+            {{#ifHelper this.isLocked}}
               <span class="reddit-locked" title="Locked post">
                 {{icon "lock"}}
               </span>
-            {{/if}}
+            {{/ifHelper}}
           </header>
 
           <h3 class="reddit-post-title">
@@ -171,11 +171,11 @@ export default class RedditPostCard extends Component {
             </a>
           </h3>
 
-          {{#if this.excerpt}}
+          {{#ifHelper this.excerpt}}
             <div class="reddit-post-excerpt" role="complementary" aria-label="Post excerpt">
               {{this.excerpt}}
             </div>
-          {{/if}}
+          {{/ifHelper}}
 
           <footer class="reddit-post-footer">
             <a href={{this.postUrl}} class="reddit-action-button comments" aria-label="{{this.replyCount}} comments">
@@ -190,16 +190,16 @@ export default class RedditPostCard extends Component {
               {{icon "bookmark"}}
               <span>Save</span>
             </button>
-            {{#if this.isLocked}}
+            {{#ifHelper this.isLocked}}
               <span class="reddit-action-button locked" aria-label="Post is locked">
                 {{icon "lock"}}
                 <span>Locked</span>
               </span>
-            {{/if}}
+            {{/ifHelper}}
           </footer>
         </div>
 
-        {{#if this.hasImage}}
+        {{#ifHelper this.hasImage}}
           <div class="reddit-post-thumbnail" role="img" aria-label="Post image">
             <img 
               src={{this.thumbnailUrl}} 
@@ -212,7 +212,7 @@ export default class RedditPostCard extends Component {
           <div class="reddit-post-thumbnail reddit-thumbnail-placeholder" role="img" aria-label="No image available">
             {{icon "image"}}
           </div>
-        {{/if}}
+        {{/ifHelper}}
       </div>
     </article>
   </template>

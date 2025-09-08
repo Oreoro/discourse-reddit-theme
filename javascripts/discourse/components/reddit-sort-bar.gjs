@@ -27,7 +27,7 @@ export default class RedditSortBar extends Component {
       <div class="reddit-sort-options">
         {{#each this.sortOptions as |option|}}
           <div
-            class="reddit-sort-option {{if (eq this.activeSort option.key) 'active'}}"
+            class="reddit-sort-option {{ifHelper (eq this.activeSort option.key) 'active'}}"
             {{on "click" (fn this.changeSort option.key)}}
           >
             {{option.label}}
