@@ -16,9 +16,14 @@ export default apiInitializer("1.8.0", (api) => {
         }
         
         const topicItems = document.querySelectorAll(".topic-list-item");
-        topicItems.forEach(item => {
+        topicItems.forEach((item, index) => {
           item.classList.add("reddit-post-card");
+          // Add staggered animation delay
+          item.style.animationDelay = `${index * 0.1}s`;
         });
+        
+        // Inject voting widgets
+        injectVotingWidgets();
       });
     }
   });
@@ -30,6 +35,131 @@ export default apiInitializer("1.8.0", (api) => {
     const isTagPage = url.includes("/tag/");
     
     return isRedditPage || isCategoryPage || isTagPage;
+  }
+
+  function injectVotingWidgets() {
+    try {
+      const topicItems = document.querySelectorAll(".topic-list-item:not(.has-vote-widget)");
+      
+      topicItems.forEach((item, index) => {
+        // Mark as processed
+        item.classList.add("has-vote-widget");
+        
+        // Create voting widget container
+        const voteContainer = document.createElement("div");
+        voteContainer.className = "reddit-vote-widget-container";
+        
+        // Generate random score for demo (in real implementation, use actual topic data)
+        const randomScore = Math.floor(Math.random() * 100) + 1;
+        
+        voteContainer.innerHTML = `
+          <div class="reddit-vote-widget" role="group" aria-label="Vote on this post">
+            <button class="reddit-vote-arrow reddit-upvote" title="Upvote this post" aria-label="Upvote">
+              <svg class="fa d-icon d-icon-chevron-up svg-icon" aria-hidden="true">
+                <use href="#chevron-up"></use>
+              </svg>
+            </button>
+            <div class="reddit-vote-score" role="status" aria-label="${randomScore} points">
+              ${randomScore}
+            </div>
+            <button class="reddit-vote-arrow reddit-downvote" title="Downvote this post" aria-label="Downvote">
+              <svg class="fa d-icon d-icon-chevron-down svg-icon" aria-hidden="true">
+                <use href="#chevron-down"></use>
+              </svg>
+            </button>
+          </div>
+        `;
+        
+        // Add click handlers for demo functionality
+        addVoteHandlers(voteContainer);
+        
+        // Insert at the beginning of the item
+        item.insertBefore(voteContainer, item.firstChild);
+      });
+    } catch (error) {
+      console.warn("Voting widget injection failed:", error);
+    }
+  }
+
+  function addVoteHandlers(container) {
+    const upvoteBtn = container.querySelector(".reddit-upvote");
+    const downvoteBtn = container.querySelector(".reddit-downvote");
+    const scoreEl = container.querySelector(".reddit-vote-score");
+    
+    let currentScore = parseInt(scoreEl.textContent);
+    let voteState = "none"; // "up", "down", or "none"
+    
+    upvoteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (voteState === "up") {
+        // Remove upvote
+        voteState = "none";
+        currentScore -= 1;
+        upvoteBtn.classList.remove("voted");
+      } else if (voteState === "down") {
+        // Switch from downvote to upvote
+        voteState = "up";
+        currentScore += 2;
+        downvoteBtn.classList.remove("voted");
+        upvoteBtn.classList.add("voted");
+      } else {
+        // Add upvote
+        voteState = "up";
+        currentScore += 1;
+        upvoteBtn.classList.add("voted");
+      }
+      
+      updateScore();
+    });
+    
+    downvoteBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      if (voteState === "down") {
+        // Remove downvote
+        voteState = "none";
+        currentScore += 1;
+        downvoteBtn.classList.remove("voted");
+      } else if (voteState === "up") {
+        // Switch from upvote to downvote
+        voteState = "down";
+        currentScore -= 2;
+        upvoteBtn.classList.remove("voted");
+        downvoteBtn.classList.add("voted");
+      } else {
+        // Add downvote
+        voteState = "down";
+        currentScore -= 1;
+        downvoteBtn.classList.add("voted");
+      }
+      
+      currentScore = Math.max(0, currentScore); // Prevent negative scores
+      updateScore();
+    });
+    
+    function updateScore() {
+      scoreEl.textContent = formatScore(currentScore);
+      scoreEl.setAttribute("aria-label", `${currentScore} points`);
+      
+      // Add visual feedback
+      scoreEl.classList.add("score-updated");
+      setTimeout(() => {
+        scoreEl.classList.remove("score-updated");
+      }, 300);
+    }
+    
+    function formatScore(score) {
+      if (score >= 1000000) {
+        return (score / 1000000).toFixed(1) + "M";
+      }
+      if (score >= 1000) {
+        return (score / 1000).toFixed(1) + "k";
+      }
+      return score.toString();
+    }
   }
 
   function applyRedditStyling() {

@@ -245,3 +245,56 @@
   border: none;
   border-radius: var(--rounded-md);
 }
+
+// Reddit-style header enhancements
+.d-header {
+  // Reddit-style search bar
+  .search-menu {
+    .search-input {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-light);
+      border-radius: 20px;
+      padding: 8px 16px;
+      color: var(--text-primary);
+      font-size: 14px;
+      
+      &::placeholder {
+        color: var(--text-muted);
+      }
+      
+      &:focus {
+        border-color: var(--reddit-orange);
+        box-shadow: 0 0 0 2px rgba(255, 69, 0, 0.2);
+        outline: none;
+      }
+    }
+  }
+  
+  // Reddit-style user menu
+  .header-dropdown-toggle {
+    .icon {
+      color: var(--text-primary);
+      transition: color 0.2s ease;
+      
+      &:hover {
+        color: var(--reddit-orange);
+      }
+    }
+  }
+  
+  // Add Reddit-style logo enhancement
+  .logo-wrapper,
+  .home-logo-wrapper-outlet {
+    a {
+      font-weight: 700;
+      color: var(--reddit-orange);
+      text-decoration: none;
+      font-size: 18px;
+      
+      &::before {
+        content: "🗨️ ";
+        margin-right: 4px;
+      }
+    }
+  }
+}

@@ -34,16 +34,36 @@ table.topic-list:not(.bookmark-list) {
     tr.topic-list-item {
       cursor: pointer;
       position: relative;
-      display: block;
+      display: flex;
       padding: 0;
       background: var(--bg-primary);
-      border: 1px solid var(--border-medium);
-      border-radius: var(--reddit-border-radius);
-      animation: none;
-      transition: border-color 0.1s ease;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      margin-bottom: 8px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      transition: all 0.2s ease;
+      overflow: hidden;
 
       &:hover {
-        border-color: var(--border-light);
+        border-color: var(--reddit-blue);
+        box-shadow: 0 2px 8px rgba(0, 123, 211, 0.15);
+        transform: translateY(-1px);
+      }
+      
+      // Reddit-style post structure
+      &::before {
+        content: '';
+        width: 4px;
+        background: transparent;
+        transition: background 0.2s ease;
+      }
+      
+      &.pinned::before {
+        background: var(--reddit-green);
+      }
+      
+      &.closed::before {
+        background: var(--reddit-red);
       }
 
       .docs-results & {
@@ -416,5 +436,95 @@ table.topic-list
   .link-top-line .event-date,
   .header-title .event-date {
     border-color: var(--primary-low);
+  }
+}
+
+// Reddit-style post enhancements
+.topic-list:not(.bookmark-list) {
+  .topic-list-item {
+    // Add voting widget placeholder
+    &::after {
+      content: '↑\A•\A↓';
+      white-space: pre;
+      position: absolute;
+      left: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 24px;
+      height: 60px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+      color: var(--text-muted);
+      background: var(--bg-secondary);
+      border-radius: 6px;
+      padding: 4px 0;
+      font-weight: bold;
+      line-height: 1;
+    }
+    
+    // Adjust main content to make room for voting
+    .main-link {
+      margin-left: 40px;
+      padding: 12px 16px 12px 8px;
+    }
+    
+    // Reddit-style title styling
+    .title {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 4px;
+      
+      a {
+        color: inherit;
+        text-decoration: none;
+        
+        &:hover {
+          color: var(--reddit-blue);
+          text-decoration: underline;
+        }
+        
+        &:visited {
+          color: var(--text-muted);
+        }
+      }
+    }
+    
+    // Reddit-style metadata
+    .topic-statuses,
+    .topic-excerpt,
+    .discourse-tags {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin: 2px 0;
+    }
+    
+    // Add Reddit-style footer with stats
+    .num {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-right: 8px;
+      
+      &.posts {
+        &::before {
+          content: "💬";
+          font-size: 10px;
+        }
+      }
+      
+      &.views {
+        &::before {
+          content: "👁";
+          font-size: 10px;
+        }
+      }
+    }
   }
 }

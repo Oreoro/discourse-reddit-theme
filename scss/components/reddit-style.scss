@@ -1,20 +1,54 @@
-// EMERGENCY: Disable problematic animations only
-.reddit-post-card {
-  animation: none !important;
+// Score update animation
+@keyframes scoreUpdate {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1.1); }
 }
 
-// Allow basic hover transitions but no transforms
-* {
-  transform: none !important;
+// Pulse animation for active indicators
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
-// Safe transitions for better UX
+// Slide in animations for posts
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Enhanced Reddit-style post cards with smooth animations
 .reddit-post-card {
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  animation: slideInUp 0.6s ease-out both;
+  will-change: transform, box-shadow;
+  contain: layout style;
   
   &:hover {
-    border-color: var(--border-focus);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: var(--reddit-orange);
+    box-shadow: 0 4px 16px rgba(255, 69, 0, 0.15);
+    transform: translateY(-2px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
+  }
+  
+  // Respect user preference for reduced motion
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+    transition: none;
+    
+    &:hover {
+      transform: none;
+    }
   }
 }
 
@@ -25,6 +59,19 @@
 }
 
 // Enhanced Reddit-style voting widget
+.reddit-vote-widget-container {
+  position: absolute;
+  left: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  
+  @media (max-width: 768px) {
+    left: 4px;
+    transform: translateY(-50%) scale(0.9);
+  }
+}
+
 .reddit-vote-widget {
   display: flex;
   flex-direction: column;
@@ -32,10 +79,16 @@
   justify-content: flex-start;
   width: 44px;
   padding: 8px 4px;
-  margin-right: 12px;
   background: var(--bg-gradient);
   border-radius: 8px;
-  transition: all var(--desktop-transition-speed) ease;
+  border: 1px solid var(--border-light);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
   
   /* Enhanced desktop voting experience */
   @media (min-width: 1024px) {
@@ -153,9 +206,22 @@
     text-align: center;
     min-height: 16px;
     transition: all 0.2s ease;
+    padding: 2px 4px;
+    border-radius: 4px;
     
     &.positive {
-      color: var(--reddit-orange);
+      color: var(--vote-up);
+    }
+    
+    &.negative {
+      color: var(--vote-down);
+    }
+    
+    &.score-updated {
+      background: var(--reddit-orange);
+      color: white;
+      transform: scale(1.1);
+      animation: scoreUpdate 0.3s ease-out;
     }
     
     &.negative {
@@ -739,6 +805,53 @@
       &:active {
         transform: scale(0.95);
       }
+      
+      .reddit-sort-label {
+        position: relative;
+      }
+      
+      .reddit-sort-indicator {
+        margin-left: 6px;
+        color: var(--reddit-orange);
+        font-weight: 900;
+        animation: pulse 2s infinite;
+      }
+      
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 8px rgba(255, 69, 0, 0.2);
+      }
+    }
+  }
+  
+  .reddit-view-toggle {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-secondary);
+    padding: 4px;
+    border-radius: 8px;
+    
+    .reddit-view-option {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &:hover {
+        background: var(--bg-hover);
+        color: var(--text-primary);
+      }
+      
+      &.active {
+        background: var(--reddit-orange);
+        color: white;
+        box-shadow: 0 2px 4px rgba(255, 69, 0, 0.3);
+      }
 
       // Add icons for different sort types
       &[data-sort="hot"]::before {
@@ -831,6 +944,7 @@
     font-weight: 700;
     position: relative;
     overflow: hidden;
+    text-align: center;
 
     &::before {
       content: '';
@@ -915,9 +1029,45 @@
       }
     }
 
+    // Community rules styling
+    .reddit-community-rules {
+      margin: 16px 0;
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border-radius: 8px;
+      border-left: 3px solid var(--reddit-orange);
+      
+      .reddit-rules-header {
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--text-primary);
+        margin-bottom: 8px;
+      }
+      
+      .reddit-rule {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        margin: 4px 0;
+        font-size: 12px;
+        line-height: 1.4;
+        
+        .reddit-rule-number {
+          color: var(--reddit-orange);
+          font-weight: 700;
+          min-width: 16px;
+        }
+        
+        .reddit-rule-text {
+          color: var(--text-secondary);
+          flex: 1;
+        }
+      }
+    }
+
     .reddit-join-button {
       width: 100%;
-      background: var(--gradient-reddit);
+      background: var(--gradient-success);
       color: white;
       border: none;
       padding: 12px 20px;
@@ -1125,6 +1275,19 @@
 // Enhanced Reddit create post button
 .reddit-create-post-container {
   margin-bottom: 20px;
+  padding: 16px;
+  text-align: center;
+  background: var(--bg-gradient);
+  border: 1px solid var(--border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-sm);
+  
+  .reddit-create-post-subtitle {
+    font-size: 12px;
+    color: var(--text-muted);
+    margin-top: 8px;
+    font-style: italic;
+  }
   
   .reddit-create-post-btn {
     width: 100%;

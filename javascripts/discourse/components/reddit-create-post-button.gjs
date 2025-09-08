@@ -22,9 +22,12 @@ export default class RedditCreatePostButton extends Component {
       <DButton
         @action={{this.createPost}}
         @icon="plus"
-        @label="Create Post"
+        @label="📝 Create Post"
         class="reddit-create-post-btn"
       />
+      <div class="reddit-create-post-subtitle">
+        Share your thoughts with the community
+      </div>
     </div>
   </template>
 }
