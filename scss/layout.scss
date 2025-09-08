@@ -4,6 +4,12 @@ html {
   font-size: 14px;
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  
+  /* Enhanced desktop typography */
+  @media (min-width: 1024px) {
+    font-size: var(--desktop-font-size);
+    line-height: var(--desktop-line-height);
+  }
 }
 
 html,
@@ -44,16 +50,24 @@ body.reddit-social-theme {
 }
 
 :root {
-  --d-max-width: 1200px;
-  --wrap-px: 1rem;
+  --d-max-width: 1400px; /* Increased for better desktop experience */
+  --wrap-px: 1.5rem; /* Better desktop padding */
   --column-navigation-mini: 3rem;
-  --column-sidebar: 312px;
+  --column-sidebar: 340px; /* Wider sidebar for better content */
   --column-navigation: minmax(0, 256px);
-  --column-content: minmax(640px, 1fr);
+  --column-content: minmax(720px, 1fr); /* Wider main content */
   --mobile-nav-h: 48px;
-  --header-height: 48px;
-  --post-card-spacing: 8px;
-  --reddit-border-radius: 4px;
+  --header-height: 56px; /* Taller header for desktop */
+  --post-card-spacing: 12px; /* More spacing between cards */
+  --reddit-border-radius: 8px; /* Slightly larger radius */
+  
+  /* Enhanced desktop-specific variables */
+  --desktop-font-size: 15px;
+  --desktop-line-height: 1.6;
+  --desktop-content-padding: 32px;
+  --desktop-sidebar-gap: 32px;
+  --desktop-hover-scale: 1.02;
+  --desktop-transition-speed: 0.25s;
 }
 
 #main {
@@ -88,16 +102,22 @@ body {
       display: grid;
       grid-template-areas: "content sidebar";
       grid-template-columns: var(--column-content) var(--column-sidebar);
-      gap: 24px;
+      gap: var(--desktop-sidebar-gap);
       box-sizing: border-box;
       margin: 0 auto;
-      padding: 20px var(--wrap-px);
+      padding: var(--desktop-content-padding) var(--wrap-px);
       max-width: var(--d-max-width);
+      
+      /* Enhanced desktop spacing */
+      @media (min-width: 1440px) {
+        gap: 40px;
+        padding: 40px var(--wrap-px);
+      }
 
       @include viewport.until(lg) {
         grid-template-columns: 1fr var(--column-sidebar);
-        gap: 16px;
-        padding: 16px var(--wrap-px);
+        gap: 20px;
+        padding: 20px var(--wrap-px);
       }
 
       @include viewport.until(md) {

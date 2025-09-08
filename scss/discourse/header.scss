@@ -7,6 +7,17 @@
   background-color: var(--bg-primary);
   border-bottom: 1px solid var(--border-medium);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all var(--desktop-transition) ease;
+  
+  /* Enhanced desktop header */
+  @media (min-width: 1024px) {
+    backdrop-filter: blur(8px);
+    background-color: rgba(255, 255, 255, 0.95);
+    
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
 
   &-wrap {
     position: fixed;
@@ -26,6 +37,17 @@
       margin: 0 auto;
       padding: 0 16px;
       gap: 16px;
+      
+      /* Enhanced desktop spacing */
+      @media (min-width: 1024px) {
+        padding: 0 24px;
+        gap: 24px;
+      }
+      
+      @media (min-width: 1440px) {
+        padding: 0 32px;
+        gap: 32px;
+      }
 
       @include viewport.until(lg) {
         padding: 0 12px;
