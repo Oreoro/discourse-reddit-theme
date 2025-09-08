@@ -1,3 +1,10 @@
+// EMERGENCY: Disable all animations to prevent page hangs
+* {
+  animation: none !important;
+  transition: none !important;
+  transform: none !important;
+}
+
 // Enhanced Reddit-style voting widget
 .reddit-vote-widget {
   display: flex;
@@ -185,38 +192,26 @@
     z-index: 1;
   }
 
-  /* Enhanced desktop hover effects */
+  /* DISABLED desktop hover effects to prevent performance issues */
   @media (min-width: 1024px) {
     margin-bottom: 16px;
     border-radius: 12px;
     
     &:hover {
       border-color: var(--border-focus);
+      /* Disabled problematic animations
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12), 0 2px 16px rgba(0, 0, 0, 0.08);
       transform: translateY(-4px) scale(var(--desktop-hover-scale));
-      
-      &::before {
-        opacity: 1;
-      }
-      
-      .reddit-post-title a {
-        color: var(--reddit-blue);
-      }
-      
-      .reddit-post-thumbnail {
-        transform: scale(1.05);
-      }
-    }
-    
-    &:active {
-      transform: translateY(-2px) scale(1.01);
+      */
     }
   }
 
   &:hover {
     border-color: var(--border-focus);
+    /* Disabled to prevent performance issues
     box-shadow: var(--shadow-hover);
     transform: translateY(-2px);
+    */
 
     &::before {
       opacity: 1;
@@ -1488,23 +1483,11 @@
     background-attachment: fixed;
   }
   
-  // Enhanced desktop animations
+  // Disabled animations to prevent performance issues
   .reddit-post-card {
-    &:nth-child(odd) {
-      animation: slideInLeft 0.6s ease forwards;
-    }
-    
-    &:nth-child(even) {
-      animation: slideInRight 0.6s ease forwards;
-    }
+    animation: none !important;
+    transform: none !important;
   }
-  
-  // Staggered animation delays
-  .reddit-post-card:nth-child(1) { animation-delay: 0.1s; }
-  .reddit-post-card:nth-child(2) { animation-delay: 0.2s; }
-  .reddit-post-card:nth-child(3) { animation-delay: 0.3s; }
-  .reddit-post-card:nth-child(4) { animation-delay: 0.4s; }
-  .reddit-post-card:nth-child(5) { animation-delay: 0.5s; }
 }
 
 // Desktop-specific animations
@@ -1559,17 +1542,17 @@
   }
 }
 
-// Performance optimizations for desktop
+// Performance optimizations for desktop - DISABLED TO PREVENT ISSUES
 @media (min-width: 1024px) {
-  // GPU acceleration for smooth animations
+  // Disable GPU acceleration temporarily
   .reddit-post-card,
   .reddit-vote-widget,
   .reddit-sort-bar,
   .reddit-community-info,
   .reddit-trending {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
+    will-change: auto;
+    backface-visibility: visible;
+    transform: none !important;
   }
   
   // Optimize repaints

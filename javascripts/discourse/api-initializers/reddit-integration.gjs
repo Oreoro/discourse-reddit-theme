@@ -5,6 +5,8 @@ export default apiInitializer("1.8.0", (api) => {
   // Add CSS class to body for Reddit theme identification
   document.body.classList.add("reddit-social-theme");
 
+  // TEMPORARILY DISABLED to prevent infinite loops and performance issues
+  /*
   // Apply Reddit styling on page navigation
   api.onPageChange((url) => {
     if (shouldApplyRedditStyling(url)) {
@@ -14,6 +16,7 @@ export default apiInitializer("1.8.0", (api) => {
       });
     }
   });
+  */
 
   function shouldApplyRedditStyling(url) {
     const redditPages = ["/", "/latest", "/new", "/top", "/hot"];
