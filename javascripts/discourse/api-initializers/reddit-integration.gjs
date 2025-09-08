@@ -2,59 +2,16 @@ import { apiInitializer } from "discourse/lib/api";
 import { schedule } from "@ember/runloop";
 
 export default apiInitializer("1.8.0", (api) => {
-  // Add Reddit-style classes to topic lists
-  api.modifyClass("component:topic-list", {
-    classNames: ["reddit-feed"]
-  });
+  // Add CSS class to body for Reddit theme identification
+  document.body.classList.add("reddit-social-theme");
 
-  // Add custom CSS classes for Reddit styling
-  api.addTopicListCellClassNames(["reddit-post-cell"]);
-
-  // Enhanced page change handler with better error handling
-  api.onPageChange((url, title) => {
+  // Apply Reddit styling on page navigation
+  api.onPageChange((url) => {
     if (shouldApplyRedditStyling(url)) {
       schedule("afterRender", () => {
         applyRedditStyling();
         addRedditSortBar();
       });
-    }
-  });
-
-  // Add Reddit-style header elements
-  api.decorateWidget("header-buttons:before", (decorator) => {
-    if (decorator.currentUser) {
-      return decorator.h("a.reddit-create-post-header", {
-        href: "/new-topic",
-        title: "Create Post",
-        attributes: { "aria-label": "Create new post" }
-      }, [
-        decorator.h("i.d-icon.d-icon-plus"),
-        "Post"
-      ]);
-    }
-  });
-
-  // Add topic status indicators
-  api.includePostAttributes("reddit_score", "reddit_vote_state");
-
-  // Custom topic list item renderer
-  api.modifyClass("component:topic-list-item", {
-    classNames: ["reddit-post-card"],
-    classNameBindings: [
-      "topic.pinned:pinned",
-      "topic.closed:locked",
-      "topic.archived:archived"
-    ],
-
-    actions: {
-      toggleLike() {
-        const topic = this.topic;
-        if (!this.currentUser) {
-          return this.router.transitionTo("login");
-        }
-        
-        return topic.toggleLike();
-      }
     }
   });
 
@@ -213,12 +170,13 @@ export default apiInitializer("1.8.0", (api) => {
         const isCompact = e.currentTarget.querySelector(".d-icon-list");
         document.body.classList.toggle("reddit-compact-view", isCompact);
         
-        // Store preference
-        if (api.getCurrentUser()) {
-          api.getCurrentUser().set("custom_fields.reddit_compact_view", isCompact);
+        // Store preference in localStorage as fallback
+        try {
+          localStorage.setItem("reddit_compact_view", isCompact.toString());
+        } catch (error) {
+          console.debug("Could not store compact view preference:", error);
         }
       });
     });
   }
-
 });
