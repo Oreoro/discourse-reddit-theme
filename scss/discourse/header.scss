@@ -2,11 +2,11 @@
 
 .d-header {
   box-sizing: content-box;
-  height: 3rem;
-  padding: 0.75rem 0;
-  background-color: var(--neutral-100);
-  border-bottom: 1px solid var(--neutral-90);
-  box-shadow: none;
+  height: var(--header-height);
+  padding: 0;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-medium);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 
   &-wrap {
     position: fixed;
@@ -19,18 +19,22 @@
 
   .wrap {
     .contents {
-      display: grid;
-      grid-template-areas: "logo search utility";
-      grid-template-columns: 19rem var(--column-content) var(--column-blocks);
-      gap: 2rem;
+      display: flex;
+      align-items: center;
+      height: var(--header-height);
+      max-width: var(--d-max-width);
+      margin: 0 auto;
+      padding: 0 16px;
+      gap: 16px;
 
       @include viewport.until(lg) {
-        display: flex;
+        padding: 0 12px;
+        gap: 12px;
       }
 
-      @media screen and (width <= 1080px) {
-        grid-template-columns: auto var(--column-content) var(--column-blocks);
-        gap: 1rem;
+      @include viewport.until(md) {
+        padding: 0 8px;
+        gap: 8px;
       }
     }
   }

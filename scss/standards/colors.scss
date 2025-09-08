@@ -1,15 +1,199 @@
 :root {
-  --neutral-0: var(--primary);
-  --neutral-5: var(--primary-900);
-  --neutral-10: var(--primary-800);
-  --neutral-20: var(--primary-700);
-  --neutral-30: var(--primary-600);
-  --neutral-40: var(--primary-500);
-  --neutral-50: var(--primary-400);
-  --neutral-60: var(--primary-300);
-  --neutral-70: var(--primary-200);
-  --neutral-80: var(--primary-200);
-  --neutral-90: var(--primary-200);
-  --neutral-95: var(--primary-50);
-  --neutral-100: var(--secondary);
+  /* Enhanced Reddit-inspired color palette */
+  --reddit-orange: #ff4500;
+  --reddit-orange-light: #ff6b35;
+  --reddit-orange-dark: #e63e00;
+  --reddit-orange-subtle: #fff5f2;
+  --reddit-blue: #0079d3;
+  --reddit-blue-light: #24a0ed;
+  --reddit-blue-dark: #005ba1;
+  --reddit-blue-subtle: #f0f8ff;
+  --reddit-dark-blue: #1a1a1b;
+  --reddit-periwinkle: #7c7fff;
+  --reddit-purple: #9c88ff;
+  --reddit-green: #46d160;
+  --reddit-green-subtle: #f0fff4;
+  --reddit-red: #ff4757;
+  --reddit-red-subtle: #fff5f5;
+  --reddit-yellow: #ffa502;
+  --reddit-yellow-subtle: #fffef0;
+  
+  /* Enhanced voting colors */
+  --upvote-orange: #ff4500;
+  --upvote-orange-hover: #ff6b35;
+  --upvote-orange-active: #e63e00;
+  --downvote-blue: #7193ff;
+  --downvote-blue-hover: #8ba7ff;
+  --downvote-blue-active: #5a7fff;
+  --vote-grey: #878a8c;
+  --vote-grey-hover: #a5a8ab;
+  
+  /* Enhanced background colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #f6f7f8;
+  --bg-quaternary: #edeff1;
+  --bg-hover: #f1f3f4;
+  --bg-active: #e8eaed;
+  --bg-gradient: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  
+  /* Dark mode backgrounds */
+  --bg-dark: #030303;
+  --bg-dark-secondary: #1a1a1b;
+  --bg-dark-tertiary: #272729;
+  --bg-dark-quaternary: #343536;
+  --bg-dark-hover: #2a2a2b;
+  --bg-dark-active: #3a3a3b;
+  --bg-dark-gradient: linear-gradient(135deg, #1a1a1b 0%, #272729 100%);
+  
+  /* Enhanced text colors */
+  --text-primary: #1c1c1c;
+  --text-secondary: #7c7c83;
+  --text-tertiary: #a5a8ab;
+  --text-quaternary: #d4d6d8;
+  --text-muted: #9ca3af;
+  --text-link: #0079d3;
+  --text-link-hover: #005ba1;
+  --text-link-visited: #9c88ff;
+  
+  /* Dark mode text colors */
+  --text-dark-primary: #f2f4f7;
+  --text-dark-secondary: #d7dadc;
+  --text-dark-tertiary: #a5a8ab;
+  --text-dark-quaternary: #878a8c;
+  --text-dark-muted: #6b7280;
+  --text-dark-link: #4fa8da;
+  --text-dark-link-hover: #24a0ed;
+  --text-dark-link-visited: #b19cd9;
+  
+  /* Enhanced border and shadow colors */
+  --border-light: #e1e5e9;
+  --border-medium: #cdd2d6;
+  --border-dark: #a5a8ab;
+  --border-focus: #0079d3;
+  --border-error: #ff4757;
+  --border-success: #46d160;
+  --border-warning: #ffa502;
+  
+  /* Dark mode borders */
+  --border-dark-light: #343536;
+  --border-dark-medium: #2a2a2b;
+  --border-dark-dark: #1a1a1b;
+  
+  /* Shadows and elevation */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1), 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1), 0 10px 10px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+  --shadow-focus: 0 0 0 3px rgba(0, 121, 211, 0.1);
+  
+  /* Dark mode shadows */
+  --shadow-dark-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-dark-md: 0 4px 6px rgba(0, 0, 0, 0.3), 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-dark-lg: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.2);
+  --shadow-dark-hover: 0 8px 25px rgba(0, 0, 0, 0.4);
+  
+  /* Brand gradients */
+  --gradient-reddit: linear-gradient(135deg, #ff4500 0%, #ff6b35 100%);
+  --gradient-blue: linear-gradient(135deg, #0079d3 0%, #24a0ed 100%);
+  --gradient-purple: linear-gradient(135deg, #9c88ff 0%, #7c7fff 100%);
+  --gradient-success: linear-gradient(135deg, #46d160 0%, #5de071 100%);
+  --gradient-warning: linear-gradient(135deg, #ffa502 0%, #ffb733 100%);
+  --gradient-error: linear-gradient(135deg, #ff4757 0%, #ff6b7d 100%);
+  
+  /* Transition timing */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s ease;
+  --transition-slow: 0.4s ease;
+  --transition-smooth: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Border radius values */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+  --radius-2xl: 16px;
+  --radius-full: 50%;
+  
+  /* Z-index scale */
+  --z-dropdown: 1000;
+  --z-sticky: 1020;
+  --z-fixed: 1030;
+  --z-modal-backdrop: 1040;
+  --z-modal: 1050;
+  --z-popover: 1060;
+  --z-tooltip: 1070;
+  
+  /* Legacy mappings for compatibility */
+  --neutral-0: var(--reddit-orange);
+  --neutral-5: var(--reddit-dark-blue);
+  --neutral-10: var(--text-primary);
+  --neutral-20: var(--text-secondary);
+  --neutral-30: var(--text-tertiary);
+  --neutral-40: var(--reddit-grey);
+  --neutral-50: var(--reddit-light-grey);
+  --neutral-60: var(--bg-tertiary);
+  --neutral-70: var(--bg-secondary);
+  --neutral-80: var(--bg-secondary);
+  --neutral-90: var(--bg-secondary);
+  --neutral-95: var(--bg-secondary);
+  --neutral-100: var(--bg-primary);
+}
+
+/* Enhanced dark mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: var(--bg-dark);
+    --bg-secondary: var(--bg-dark-secondary);
+    --bg-tertiary: var(--bg-dark-tertiary);
+    --bg-quaternary: var(--bg-dark-quaternary);
+    --bg-hover: var(--bg-dark-hover);
+    --bg-active: var(--bg-dark-active);
+    --bg-gradient: var(--bg-dark-gradient);
+    
+    --text-primary: var(--text-dark-primary);
+    --text-secondary: var(--text-dark-secondary);
+    --text-tertiary: var(--text-dark-tertiary);
+    --text-quaternary: var(--text-dark-quaternary);
+    --text-muted: var(--text-dark-muted);
+    --text-link: var(--text-dark-link);
+    --text-link-hover: var(--text-dark-link-hover);
+    --text-link-visited: var(--text-dark-link-visited);
+    
+    --border-light: var(--border-dark-light);
+    --border-medium: var(--border-dark-medium);
+    --border-dark: var(--border-dark-dark);
+    
+    --shadow-sm: var(--shadow-dark-sm);
+    --shadow-md: var(--shadow-dark-md);
+    --shadow-lg: var(--shadow-dark-lg);
+    --shadow-hover: var(--shadow-dark-hover);
+    
+    /* Legacy mappings */
+    --neutral-10: var(--text-dark-primary);
+    --neutral-20: var(--text-dark-secondary);
+    --neutral-100: var(--bg-dark);
+    --neutral-95: var(--bg-dark-secondary);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --border-light: #000000;
+    --border-medium: #000000;
+    --text-secondary: #000000;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: none;
+    --transition-normal: none;
+    --transition-slow: none;
+  }
 }

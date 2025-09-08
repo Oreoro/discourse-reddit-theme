@@ -10,6 +10,7 @@ table.topic-list:not(.bookmark-list) {
     display: flex;
     flex-direction: column;
     border: 0;
+    gap: var(--post-card-spacing);
 
     tr.topic-list-item-separator {
       display: flex;
@@ -33,17 +34,17 @@ table.topic-list:not(.bookmark-list) {
     tr.topic-list-item {
       cursor: pointer;
       position: relative;
-      display: grid;
-      grid-template-areas: "avatar author actions" "avatar category actions" "avatar title actions" "avatar tags actions" "avatar content actions" "avatar replies actions";
-      grid-template-columns: 2rem auto auto;
-      gap: 0 1rem;
-      padding: 1rem;
-      background: var(--neutral-100);
-      border-top: var(--border-inner);
-      border-bottom: 0;
+      display: block;
+      padding: 0;
+      background: var(--bg-primary);
+      border: 1px solid var(--border-medium);
+      border-radius: var(--reddit-border-radius);
       animation: none;
+      transition: border-color 0.1s ease;
 
-      @include hover($opacity: 0.02);
+      &:hover {
+        border-color: var(--border-light);
+      }
 
       .docs-results & {
         display: flex;

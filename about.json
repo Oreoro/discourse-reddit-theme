@@ -1,10 +1,10 @@
 {
-  "name": "Central",
-  "authors": "Carson Chang & The Discourse Team",
+  "name": "Reddit Social",
+  "authors": "Custom Theme Developer",
   "about_url": "https://github.com/discourse/discourse-central-theme",
   "license_url": "https://github.com/discourse/discourse-central-theme/blob/main/LICENSE",
-  "learn_more": "https://meta.discourse.org/t/discourse-central-theme-meta-pre-release-out-now/287495",
-  "theme_version": "0.0.1",
+  "learn_more": "Reddit-inspired social media theme for Discourse",
+  "theme_version": "1.0.0",
   "color_schemes": {},
   "components": [
     "https://github.com/discourse/discourse-material-design-icons-outlined",

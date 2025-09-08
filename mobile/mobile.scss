@@ -1,5 +1,4 @@
-// todo: these can probably be fixed elsewhere
-// so this file can be removed
+// Reddit-style mobile optimizations
 .topic-navigation + .row {
   max-width: unset !important; // overrides very specific core rule
 }
@@ -35,5 +34,301 @@ body.has-full-page-chat {
   .create,
   .btn {
     border-radius: var(--rounded-full);
+  }
+}
+
+// Enhanced Reddit-style mobile adaptations
+@media (max-width: 768px) {
+  .reddit-post-card {
+    border-left: none;
+    border-right: none;
+    border-radius: 0;
+    margin-bottom: 1px;
+    transition: background-color 0.2s ease;
+
+    // Better touch targets
+    &:active {
+      background-color: var(--bg-hover);
+    }
+
+    .reddit-post-content {
+      padding: 12px 8px;
+      min-height: 64px; // Ensure minimum touch target size
+
+      .reddit-post-main {
+        .reddit-post-title {
+          font-size: 16px;
+          line-height: 1.4;
+          margin-bottom: 8px;
+          
+          a {
+            display: block;
+            min-height: 44px; // iOS touch target requirement
+            display: flex;
+            align-items: center;
+            padding: 4px 0;
+          }
+        }
+
+        .reddit-post-header {
+          margin-bottom: 8px;
+          flex-wrap: wrap;
+          
+          .reddit-community {
+            padding: 4px 8px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+          }
+        }
+
+        .reddit-post-excerpt {
+          font-size: 14px;
+          max-height: 84px;
+          -webkit-line-clamp: 3;
+          margin-bottom: 12px;
+        }
+
+        .reddit-post-footer {
+          gap: 8px;
+          font-size: 12px;
+          flex-wrap: wrap;
+          
+          .reddit-action-button {
+            min-height: 44px;
+            padding: 8px 12px;
+            border-radius: 22px;
+            flex: 1;
+            justify-content: center;
+            max-width: 120px;
+            
+            &:active {
+              transform: scale(0.95);
+              background-color: var(--bg-active);
+            }
+          }
+        }
+      }
+
+      .reddit-post-thumbnail {
+        width: 84px;
+        height: 63px;
+        margin-left: 8px;
+        flex-shrink: 0;
+        
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+  }
+
+  .reddit-vote-widget {
+    width: 36px;
+    padding: 8px 4px;
+    margin-right: 8px;
+
+    .reddit-vote-arrow {
+      width: 28px;
+      height: 28px;
+      margin: 2px 0;
+      
+      // Better touch targets for mobile
+      &:active {
+        transform: scale(0.9);
+        background-color: var(--bg-active);
+      }
+
+      .d-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+
+    .reddit-vote-score {
+      font-size: 12px;
+      margin: 4px 0;
+      min-height: 18px;
+    }
+  }
+
+  .reddit-sort-bar {
+    margin: 8px;
+    padding: 8px 12px;
+    position: sticky;
+    top: calc(var(--header-height) + 8px);
+    z-index: 10;
+    box-shadow: var(--shadow-md);
+
+    .reddit-sort-options {
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      
+      &::-webkit-scrollbar {
+        height: 2px;
+      }
+      
+      &::-webkit-scrollbar-thumb {
+        background: var(--border-medium);
+        border-radius: 1px;
+      }
+
+      .reddit-sort-option {
+        font-size: 14px;
+        padding: 8px 16px;
+        white-space: nowrap;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        
+        &:active {
+          transform: scale(0.95);
+        }
+      }
+    }
+    
+    .reddit-view-toggle {
+      margin-left: 12px;
+      
+      .toggle-option {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+        &:active {
+          transform: scale(0.9);
+        }
+      }
+    }
+  }
+
+  // Improved sidebar handling on mobile
+  .reddit-community-info,
+  .reddit-trending {
+    display: none;
+  }
+
+  // Mobile-specific header improvements
+  .d-header {
+    .wrap .contents {
+      padding: 0 12px;
+      gap: 12px;
+      min-height: var(--header-height);
+    }
+
+    .home-logo-wrapper-outlet {
+      img {
+        max-height: 28px;
+      }
+    }
+    
+    // Make header buttons more touch-friendly
+    .d-header-icons {
+      li > button,
+      li > .icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 22px;
+        
+        &:active {
+          transform: scale(0.9);
+          background-color: var(--bg-active);
+        }
+      }
+    }
+  }
+
+  // Swipe gesture hints
+  .reddit-post-card {
+    position: relative;
+    
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 24px;
+      background: var(--border-medium);
+      opacity: 0.3;
+      border-radius: 1px;
+    }
+  }
+
+  // Enhanced touch feedback for all interactive elements
+  .reddit-action-button,
+  .reddit-community,
+  .reddit-author,
+  .reddit-trending-item {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    touch-action: manipulation;
+  }
+
+  // Prevent zoom on input focus
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  textarea {
+    font-size: 16px;
+  }
+}
+
+// Extra small screens (phones in portrait)
+@media (max-width: 480px) {
+  .reddit-post-card {
+    .reddit-post-content {
+      padding: 8px 6px;
+      
+      .reddit-post-main {
+        .reddit-post-title {
+          font-size: 15px;
+        }
+        
+        .reddit-post-footer {
+          .reddit-action-button {
+            font-size: 11px;
+            padding: 6px 8px;
+            min-height: 36px;
+            
+            span {
+              display: none;
+            }
+            
+            // Show only icons on very small screens
+            .d-icon {
+              margin: 0;
+            }
+          }
+        }
+      }
+      
+      .reddit-post-thumbnail {
+        width: 72px;
+        height: 54px;
+      }
+    }
+  }
+  
+  .reddit-vote-widget {
+    width: 32px;
+    padding: 6px 2px;
+    
+    .reddit-vote-arrow {
+      width: 24px;
+      height: 24px;
+      
+      .d-icon {
+        width: 14px;
+        height: 14px;
+      }
+    }
+    
+    .reddit-vote-score {
+      font-size: 11px;
+    }
   }
 }

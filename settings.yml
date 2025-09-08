@@ -1,5 +1,5 @@
 topic_list_show_usernames:
-  default: false
+  default: true
   type: bool
   required: true
 
@@ -7,26 +7,29 @@ leaderboard_id:
   default: 7
   type: integer
 
+enable_reddit_voting:
+  default: true
+  type: bool
+  description: "Enable Reddit-style upvote/downvote system"
+
+show_post_thumbnails:
+  default: true
+  type: bool
+  description: "Show thumbnails for posts with images"
+
+compact_mode:
+  default: false
+  type: bool
+  description: "Enable compact Reddit-style view"
+
 blocks:
   default:
     [
       { "order": 1, "blocks": [{ "name": "profile", "size": "4w" }] },
       {
-        "order": 3,
+        "order": 2,
         "blocks":
-          [
-            {
-              "name": "top_topics",
-              "size": "4w",
-              "count": 10,
-              "period": "quarterly",
-            },
-          ],
-      },
-      {
-        "order": 4,
-        "blocks":
-          [{ "name": "top_contributors", "size": "4w", "period": "quarterly" }],
+          [{ "name": "top_contributors", "size": "4w", "period": "weekly" }],
       },
     ]
   type: objects
