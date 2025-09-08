@@ -5,9 +5,8 @@ import { tracked } from "@glimmer/tracking";
 import { on } from "@ember/modifier";
 import RedditVoteWidget from "./reddit-vote-widget";
 import formatDate from "discourse/helpers/format-date";
-import categoryLink from "discourse/helpers/category-link";
-import userLink from "discourse/helpers/user-link";
-import icon from "discourse-common/helpers/d-icon";
+import UserLink from "discourse/components/user-link";
+import icon from "discourse/helpers/d-icon";
 import { if as ifHelper } from "@ember/helper";
 
 export default class RedditPostCard extends Component {
@@ -145,7 +144,7 @@ export default class RedditPostCard extends Component {
             <span class="reddit-separator" aria-hidden="true">•</span>
             <span class="reddit-posted-by">Posted by</span>
             {{#ifHelper this.authorInfo.user}}
-              {{userLink this.authorInfo.user hideAvatar="true" class="reddit-author"}}
+              <UserLink @user={{this.authorInfo.user}} @hideAvatar={{true}} class="reddit-author" />
             {{else}}
               <span class="reddit-author deleted-user">{{this.authorInfo.username}}</span>
             {{/ifHelper}}
